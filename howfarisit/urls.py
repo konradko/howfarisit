@@ -1,5 +1,7 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
-urlpatterns = patterns('main.views',
-    url(r'^$', 'show_distance', name='show_distance'),
+import main.views
+
+urlpatterns = patterns('',
+    url(r'^$', main.views.view_distance, name='view_distance'),
 )
