@@ -33,8 +33,17 @@ def get_lon_lat(ip):
         addr = ip
     return GeoIP().lon_lat(addr)
 
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 def get_user_distance(request):
-    user_ip = request.META.get('REMOTE_ADDR', None)
+    user_ip = get_client_ip(request)
     user_coordinates = get_lon_lat(user_ip)
     dest_coordinates = (-0.109762, 51.522199)
 
