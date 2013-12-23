@@ -14,13 +14,17 @@ def view_distance(request):
     user_distance = get_user_distance(request, destination)
     if user_distance:
         content = "%f km" % user_distance
+        status_code = 200
     else:
         content = "Sorry, can't get your location."
-    return render(
+        status_code = 500
+    response = render(
         request,
         'base.html',
         {'content': content}
     )
+    response.status_code = status_code
+    return response
 
 def api_view(request):
     """
