@@ -13,7 +13,7 @@ def view_distance(request):
     """
     user_distance = get_user_distance(request, destination)
     if user_distance:
-        content = "%i km" % user_distance
+        content = "%f km" % user_distance
     else:
         content = "Sorry, can't get your location."
     return render(
