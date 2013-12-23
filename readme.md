@@ -1,4 +1,6 @@
-# Django app showing distance between approximate visitor location and given destination
+# howfarisit
+
+Django app showing distance between approximate visitor location and given destination
 
 Example: <http://howfarissharehoods.korzel.com>
 
