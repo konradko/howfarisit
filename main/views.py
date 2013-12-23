@@ -4,11 +4,14 @@ from django.http import HttpResponse, HttpResponseServerError
 
 from tools import get_user_distance
 
+# (longitude, latitude)
+destination = (-0.109762, 51.522199)
+
 def view_distance(request):
     """
     Renders template with user location or error message
     """
-    user_distance = get_user_distance(request)
+    user_distance = get_user_distance(request, destination)
     if user_distance:
         content = "%i km" % user_distance
     else:
@@ -23,7 +26,7 @@ def api_view(request):
     """
     Responds with user location in JSON format or error message
     """
-    user_distance = get_user_distance(request)
+    user_distance = get_user_distance(request, destination)
     if user_distance:
         response_data = {'Distance': str(user_distance)}
         return HttpResponse(

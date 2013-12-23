@@ -32,16 +32,15 @@ def get_lon_lat(addr):
         addr = 'google.com'
     return GeoIP().lon_lat(addr)
 
-def get_user_distance(request):
+def get_user_distance(request, dest_coordinates):
     """
     Returns approximate user distance from dest_coordinates
-    location or None if it can't get user location
+    location or None if it can't get user location.
+    dest_coordinates must be a (longitude, latitude) tuple.
     """
     user_ip = get_ip_address_from_request(request)
     user_coordinates = get_lon_lat(user_ip)
     if user_coordinates:
-        dest_coordinates = (-0.109762, 51.522199)
-
         user_distance_obj = Distance(
             user_ip=user_ip,
             distance=calc_distance(
