@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseServerError
 
-from tools import get_user_coordinates, get_user_distance
+from tools import get_user_coordinates, calc_distance
 
 # (longitude, latitude)
 destination = (-0.109762, 51.522199)
@@ -13,7 +13,7 @@ def view_distance(request):
     """
     user_coordinates = get_user_coordinates(request)
     if user_coordinates:
-        user_distance = get_user_distance(user_coordinates, destination)
+        user_distance = calc_distance(user_coordinates, destination)
         content = "%f km" % user_distance
         status_code = 200
     else:
@@ -33,7 +33,7 @@ def api_view(request):
     """
     user_coordinates = get_user_coordinates(request)
     if user_coordinates:
-        user_distance = get_user_distance(user_coordinates, destination)
+        user_distance = calc_distance(user_coordinates, destination)
         response_data = {'Distance': str(user_distance)}
         return HttpResponse(
             json.dumps(response_data),

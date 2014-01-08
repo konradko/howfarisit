@@ -34,16 +34,3 @@ def get_user_coordinates(request):
     user_ip = get_ip_address_from_request(request)
     user_coordinates = get_lon_lat(user_ip)
     return user_coordinates
-
-def get_user_distance(user_coordinates, dest_coordinates):
-    """
-    Returns approximate user distance from dest_coordinates
-    location or None if it can't get user location.
-    dest_coordinates must be a (longitude, latitude) tuple.
-    """
-    user_distance = calc_distance(
-        user_coordinates,
-        dest_coordinates
-    )
-    # Add saving if we want to keep user records
-    return user_distance
