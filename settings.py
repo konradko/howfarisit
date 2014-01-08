@@ -14,8 +14,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': '',
-        'NAME': '',
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': 'howfarisit.db',
 
     }
 }
