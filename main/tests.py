@@ -4,15 +4,6 @@ from django.test.client import Client
 from django.test import TestCase
 from django.conf import settings
 
-from main.models import Distance
-
-class TestModel(TestCase):
-
-    def test_distance_creation(self):
-        distance = Distance(user_ip='127.0.0.1', distance=1)
-        self.assertTrue(isinstance(distance, Distance))
-        self.assertEqual(distance.__unicode__(), distance.distance)
-
 class TestViews(TestCase):
 
     def test_view_distance(self):
