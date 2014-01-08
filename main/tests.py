@@ -4,6 +4,20 @@ from django.test.client import Client
 from django.test import TestCase
 from django.conf import settings
 
+import tools
+
+class TestTools(TestCase):
+
+    destination = (-0.109762, 51.522199)
+
+    def test_calc_distance(self):
+        distance = tools.calc_distance(self.destination, self.destination)
+        self.assertEqual(distance, 0)
+
+    def test_get_lon_lat(self):
+        lon_lat = tools.get_lon_lat('google.com')
+        self.assertTrue(isinstance(lon_lat, tuple))
+
 class TestViews(TestCase):
 
     def test_view_distance(self):
