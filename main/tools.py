@@ -1,9 +1,7 @@
 from django.conf import settings
 from django.contrib.gis.utils import GeoIP
-from ipware.ip import get_ip_address_from_request
 from math import cos, sin, asin, sqrt, radians
-
-from main.models import Distance
+from ipware.ip import get_ip_address_from_request
 
 # Helper functions
 def calc_distance(first_coordinates, second_coordinates):
@@ -32,23 +30,20 @@ def get_lon_lat(addr):
         addr = 'google.com'
     return GeoIP().lon_lat(addr)
 
-def get_user_distance(request, dest_coordinates):
+def get_user_coordinates(request):
+    user_ip = get_ip_address_from_request(request)
+    user_coordinates = get_lon_lat(user_ip)
+    return user_coordinates
+
+def get_user_distance(user_coordinates, dest_coordinates):
     """
     Returns approximate user distance from dest_coordinates
     location or None if it can't get user location.
     dest_coordinates must be a (longitude, latitude) tuple.
     """
-    user_ip = get_ip_address_from_request(request)
-    user_coordinates = get_lon_lat(user_ip)
-    if user_coordinates:
-        user_distance_obj = Distance(
-            user_ip=user_ip,
-            distance=calc_distance(
-                user_coordinates,
-                dest_coordinates
-            )
-        )
-        # Add saving if we want to keep user records
-        return user_distance_obj.distance
-    else:
-        return None
+    user_distance = calc_distance(
+        user_coordinates,
+        dest_coordinates
+    )
+    # Add saving if we want to keep user records
+    return user_distance
