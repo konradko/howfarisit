@@ -2,8 +2,6 @@
 
 Django app showing distance between approximate visitor location and given destination
 
-Example: <http://howfarissharehoods.korzel.com>
-
 * Calculates the distance with [Haversine Formula](http://stackoverflow.com/questions/4913349/haversine-formula-in-python-bearing-and-distance-between-two-gps-points)
 * User geolocation with [GeoIP](https://docs.djangoproject.com/en/dev/ref/contrib/gis/geoip/)
 * Uses [django-ipware](https://pypi.python.org/pypi/django-ipware) to get user ip from request
